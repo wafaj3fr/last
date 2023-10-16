@@ -9,7 +9,7 @@
 
 int main(int ac, char **argv)
 {
-    char *prompt_of_us = "The_shell_is_this $";
+    /*char *prompt_of_us = "The_shell_is_this $";*/
     char *line = NULL, *line_cp = NULL;
     /*const char *delimmeter = " \n";
     int num_pars = 0;
@@ -20,10 +20,10 @@ int main(int ac, char **argv)
 
     (void)ac;
 
-    while (prompt_of_us)
+    while (1)
     {
 
-        write(1, prompt_of_us, _strlen(prompt_of_us));
+       prompt_of_us();
         chread = getline(&line, &n, stdin);
 
         if (chread == -1)
