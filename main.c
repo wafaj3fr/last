@@ -32,20 +32,6 @@ int main(int ac, char **argv)
             write(1, "\n", 1);
             break;
         }
-
-        line_cp = malloc(chread);
-
-        if (line_cp == NULL)
-        {
-            write(1, "tsh: memory allocation error", 28);
-            return (-1);
-        }
-
-        for (i = 0; argv[i]; i++)
-        {
-            write(1, argv[i], _strlen(argv[i]));
-            write(1, ": No such file or directory\n", 28);
-        }
     }
 
     return (0);
