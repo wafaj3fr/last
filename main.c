@@ -23,7 +23,7 @@ int main(int ac, char **argv)
     while (1)
     {
 
-       prompt_of_us();
+    prompt_of_us();
         chread = getline(&line, &n, stdin);
 
         if (chread == -1)
