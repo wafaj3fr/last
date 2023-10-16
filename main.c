@@ -17,13 +17,14 @@ int main(int ac, char **argv)
     size_t n = 0;
     ssize_t chread;
     int i;
+    __pid_t pid;
 
     (void)ac;
 
     while (1)
     {
 
-    prompt_of_us();
+        prompt_of_us();
         chread = getline(&line, &n, stdin);
 
         if (chread == -1)
@@ -45,7 +46,7 @@ int main(int ac, char **argv)
             write(1, argv[i], _strlen(argv[i]));
             write(1, ": No such file or directory\n", 28);
         }
-        }
+    }
 
     return (0);
 }
