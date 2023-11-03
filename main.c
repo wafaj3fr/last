@@ -21,6 +21,8 @@ int main(int ac, char **argv)
         if (isatty(STDIN_FILENO))
             write(1, "$ ", 2);
         stread = getline(&line, &n, stdin);
+        if (stread == EOF)
+            return (-1);
         printf("%s", line);
     }
     return (0);
