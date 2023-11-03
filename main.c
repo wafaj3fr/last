@@ -24,7 +24,7 @@ int main(int ac, char **argv)
         if (stread == EOF)
             return (-1);
         printf("%s", line);
-    	free(line);
+        tok(line);
     }
     return (0);
 }
