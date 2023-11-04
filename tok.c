@@ -5,7 +5,7 @@ char **tok(char *line)
 {
     char *token;
     char *delim = " \n\t";
-    int i;
+    int i, j;
 
     token = strtok(line, delim);
 
@@ -15,14 +15,19 @@ char **tok(char *line)
         if (arr[i] == NULL)
         {
             write(1, "tsh: memory allocation error", 28);
-            break;
-            ;
+            for (j = 0; j < i; j++)
+            {
+                free(arr[j]);
+            }
+
+            return (NULL);
         }
 
         _strcpy(arr[i], token);
         token = strtok(NULL, delim);
     }
     arr[i] = NULL;
+    free(arr[i]);
 
     printf("%s", *arr);
 

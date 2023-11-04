@@ -28,5 +28,9 @@ int main(int ac, char **argv)
         path = argv[0];
         execve(path, argv, NULL);
     }
+
+    free(path);
+    free(argv);
+    free(line);
     return (0);
 }
