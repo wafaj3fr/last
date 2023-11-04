@@ -1,10 +1,10 @@
 #include "main.h"
 
+char *arr[1024];
 char **tok(char *line)
 {
     char *token;
     char *delim = " ";
-    char *arr[1024];
     int i;
 
     token = strtok(line, delim);

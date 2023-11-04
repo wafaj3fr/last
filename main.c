@@ -27,7 +27,7 @@ int main(int ac, char **argv)
 
         argv = tok(line);
         path = line;
-        execute(path, argv);
+        exec_wa(path, argv);
     }
     return (0);
 }

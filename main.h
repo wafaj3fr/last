@@ -12,6 +12,6 @@ char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 int _strcmp(const char *s1, const char *s2);
 char **tok(char *line);
-void execute(char *path, char *const *argv);
+void exec_wa(char *path, char *const *argv);
 
 #endif
