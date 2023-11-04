@@ -12,9 +12,9 @@ int main(int ac, char **argv)
     char *line = NULL;
     size_t n = 0;
     ssize_t stread;
+    char *path;
 
     (void)ac;
-    (void)argv;
 
     while (1)
     {
@@ -24,7 +24,10 @@ int main(int ac, char **argv)
         if (stread == EOF)
             return (-1);
         printf("%s", line);
-        tok(line);
+
+        argv = tok(line);
+        path = line;
+        execute(path, argv);
     }
     return (0);
 }
