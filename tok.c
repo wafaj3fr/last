@@ -9,15 +9,21 @@ char **tok(char *line)
 
     token = strtok(line, delim);
 
-    while (token != NULL)
-    {
-        printf("Token: %s\n", token);
-        for (i = 0; arr[i]; i++)
+        for (i = 0; token != NULL; i++)
         {
-            arr[i] = token;
+            arr[i] = malloc(_strlen(token) + 1);
+            if (arr[i] == NULL)
+            {
+                write(1, "tsh: memory allocation error", 28);
+                break;;
+            }
+
+            _strcpy(arr[i], token);
+            token = strtok(NULL, delim);
         }
-        token = strtok(NULL, delim);
-    }
+        arr[i] = NULL;
+
+    printf("%s", *arr);
 
     return arr;
 }

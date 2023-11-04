@@ -23,11 +23,10 @@ int main(int ac, char **argv)
         stread = getline(&line, &n, stdin);
         if (stread == EOF)
             return (-1);
-        printf("%s", line);
 
-        argv = tok(line);
         path = line;
-        exec_wa(path, argv);
+        argv = tok(line);
+        execve(path, argv, NULL);
     }
     return (0);
 }
