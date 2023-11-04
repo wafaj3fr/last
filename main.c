@@ -24,8 +24,8 @@ int main(int ac, char **argv)
         if (stread == EOF)
             return (-1);
 
-        path = line;
         argv = tok(line);
+        path = argv[0];
         execve(path, argv, NULL);
     }
     return (0);
