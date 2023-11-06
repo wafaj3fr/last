@@ -11,11 +11,11 @@
 char *get_line(char **av)
 {
 	char *line = NULL;
-	size_t len = 0;
-	ssize_t chread;
+	size_t n = 0;
+	ssize_t stread;
 
-	nread =  getline(&line, &len, stdin);
-	if (chread == -1)
+	stread =  getline(&line, &n, stdin);
+	if (stread == -1)
 	{
 		if (feof(stdin))
 		{
@@ -30,8 +30,8 @@ char *get_line(char **av)
 		}
 	}
 
-	if (line[chread - 1] == '\n')
-		line[chread - 1] = '\0';
+	if (line[stread - 1] == '\n')
+		line[stread - 1] = '\0';
 
 	return (line);
 }
