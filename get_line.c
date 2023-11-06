@@ -3,12 +3,12 @@
 /**
  * get_line - get input to shell exec
  *
- * @av: arg values
+ * @argv: arg values
  *
  * Return: line readed;
  */
 
-char *get_line(char **av)
+char *get_line(char **argv)
 {
 	char *line = NULL;
 	size_t n = 0;
@@ -24,7 +24,7 @@ char *get_line(char **av)
 		}
 		else
 		{
-			_print(2, av, " :can not read input\n");
+			_print(2, argv, " :can not read input\n");
 			free(line);
 			return (NULL);
 		}

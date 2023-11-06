@@ -13,5 +13,6 @@ char *_strcat(char *dest, char *src);
 int _strcmp(const char *s1, const char *s2);
 char **tok(char *line);
 void exec_wa(char *path, char *const *argv);
+char *get_line(char **argv);
 
 #endif
