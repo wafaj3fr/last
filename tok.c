@@ -15,21 +15,15 @@ char **tok(char *line)
         if (arr[i] == NULL)
         {
             write(1, "tsh: memory allocation error", 28);
+
             for (j = 0; j < i; j++)
-            {
                 free(arr[j]);
-            }
-
-            return (NULL);
+            break;
         }
-
         _strcpy(arr[i], token);
         token = strtok(NULL, delim);
     }
+
     arr[i] = NULL;
-    free(arr[i]);
-
-    printf("%s", *arr);
-
     return arr;
 }

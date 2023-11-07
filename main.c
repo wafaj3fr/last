@@ -9,10 +9,7 @@
 
 int main(int ac, char **argv)
 {
-    char *line = NULL;
-    size_t n = 0;
-    ssize_t stread;
-    char *path;
+    char *command, *toks, *path;
 
     (void)ac;
 
@@ -20,17 +17,29 @@ int main(int ac, char **argv)
     {
         if (isatty(STDIN_FILENO))
             write(1, "$ ", 2);
-        stread = getline(&line, &n, stdin);
-        if (stread == EOF)
-            return (-1);
 
-        argv = tok(line);
-        path = argv[0];
-        execve(path, argv, NULL);
+        command = get_line(argv);
+        if (command == NULL)
+            continue;
+
+        toks = tok(command);
+        if (toks == NULL)
+        {
+            free(command);
+            continue;
+        }
+        free(command);
+
+        exec_wa(path, argv);
+
+        free_arr(toks);
     }
 
-    free(path);
-    free(argv);
-    free(line);
+    if (command != NULL)
+        free(command);
+
+    if (toks != NULL)
+        free_arr(toks);
+
     return (0);
 }

@@ -14,5 +14,6 @@ int _strcmp(const char *s1, const char *s2);
 char **tok(char *line);
 void exec_wa(char *path, char *const *argv);
 char *get_line(char **argv);
+int get_path(char **tokens, char **env);
 
 #endif

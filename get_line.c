@@ -14,7 +14,7 @@ char *get_line(char **argv)
 	size_t n = 0;
 	ssize_t stread;
 
-	stread =  getline(&line, &n, stdin);
+	stread = getline(&line, &n, stdin);
 	if (stread == -1)
 	{
 		if (feof(stdin))
