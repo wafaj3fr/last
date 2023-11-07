@@ -24,7 +24,8 @@ char *get_line(char **argv)
 		}
 		else
 		{
-			_print(2, argv, " :can not read input\n");
+			write(2, argv[0], _strlen(argv[0]));
+			write(2, " :can not read input\n", _strlen(" :can not read input\n"));
 			free(line);
 			return (NULL);
 		}
