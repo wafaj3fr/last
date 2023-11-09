@@ -18,13 +18,13 @@ char **tok(char *line, char **argv)
 {
     char *line_copy, *token, *delim = " \n\t";
     int i, toknum = 0, n = 0;
-    char **toks;
+    /*char **toks;*/
 
     toknum = _strlen(line) + 1;
     line_copy = malloc(sizeof(char) * toknum);
     if (line_copy == NULL)
     {
-        write(1, "error in allocate memory", 26);
+        write(1, "error in allocate memory", _strlen("error in allocate memory"));
         return (NULL);
     }
     _strcpy(line_copy, line);
