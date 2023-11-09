@@ -1,29 +1,64 @@
 #include "main.h"
 
-char *arr[1024];
-char **tok(char *line)
+int tok_num(char *line)
 {
-    char *token;
-    char *delim = " \n\t";
-    int i, j;
+    char *tok, *sep = " \n";
+    int n = 0;
 
+    tok = strtok(line, sep);
+    while (tok != NULL)
+    {
+        n++;
+        tok = strtok(NULL, sep);
+    }
+    return (n);
+}
+
+char **tok(char *line, char **argv)
+{
+    char *line_copy, *token, *delim = " \n\t";
+    int i, toknum = 0, n = 0;
+    char **toks;
+
+    toknum = _strlen(line) + 1;
+    line_copy = malloc(sizeof(char) * toknum);
+    if (line_copy == NULL)
+    {
+        write(1, "error in allocate memory", 26);
+        return (NULL);
+    }
+    _strcpy(line_copy, line);
+    n = tok_num(line_copy);
     token = strtok(line, delim);
 
+    while (token != NULL)
+    {
+        toknum++;
+        token = strtok(NULL, delim);
+    }
+    toknum++;
+
+    argv = (char **)malloc(sizeof(char *) * toknum);
+    if (argv == NULL)
+    {
+        write(1, "tsh: memory allocation error", 28);
+        return (NULL);
+    }
     for (i = 0; token != NULL; i++)
     {
-        arr[i] = malloc(_strlen(token) + 1);
-        if (arr[i] == NULL)
+        argv[i] = malloc(_strlen(token) + 1);
+        if (argv[i] == NULL)
         {
             write(1, "tsh: memory allocation error", 28);
 
-            for (j = 0; j < i; j++)
-                free(arr[j]);
-            break;
+            return NULL;
         }
-        _strcpy(arr[i], token);
+
+        _strcpy(argv[i], token);
         token = strtok(NULL, delim);
+        printf("%s: is a token\n", (char *)argv);
     }
 
-    arr[i] = NULL;
-    return arr;
+    argv[i] = NULL;
+    return argv;
 }

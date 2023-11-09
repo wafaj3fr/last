@@ -9,7 +9,9 @@
 
 int main(int ac, char **argv)
 {
-    char *command, *toks, *path;
+    int i;
+    char *command = NULL, **toks = NULL;
+    /*char *path;*/
 
     (void)ac;
 
@@ -22,24 +24,31 @@ int main(int ac, char **argv)
         if (command == NULL)
             continue;
 
-        toks = tok(command);
+        toks = tok(command, argv);
+        printf("%s", (char *)toks);
         if (toks == NULL)
         {
             free(command);
             continue;
         }
+        for (i = 0; toks[i] != NULL; i++)
+        {
+            printf("%s", toks[i]);
+            printf("THE SHELL");
+        }
+
         free(command);
 
-        exec_wa(path, argv);
+        exec_wa(toks[0], (char *const *)toks);
 
-        free_arr(toks);
+        _free(toks);
     }
 
     if (command != NULL)
         free(command);
 
     if (toks != NULL)
-        free_arr(toks);
+        _free(toks);
 
     return (0);
 }
