@@ -14,11 +14,11 @@ int tok_num(char *line)
     return (n);
 }
 
-char **tok(char *line, char **argv)
+char **tok(char *line)
 {
     char *line_copy, *token, *delim = " \n\t";
-    int i, toknum = 0, n = 0;
-    /*char **toks;*/
+    int i = 0, toknum = 0;
+    char **toks = NULL;
 
     toknum = _strlen(line) + 1;
     line_copy = malloc(sizeof(char) * toknum);
@@ -28,37 +28,25 @@ char **tok(char *line, char **argv)
         return (NULL);
     }
     _strcpy(line_copy, line);
-    n = tok_num(line_copy);
-    token = strtok(line, delim);
+    toknum = tok_num(line_copy);
 
+    toks = malloc((toknum + 1) * sizeof(char *));
+    if (toks == NULL)
+        return (NULL);
+
+    token = strtok(line, delim);
     while (token != NULL)
     {
-        toknum++;
-        token = strtok(NULL, delim);
-    }
-    toknum++;
-
-    argv = (char **)malloc(sizeof(char *) * toknum);
-    if (argv == NULL)
-    {
-        write(1, "tsh: memory allocation error", 28);
-        return (NULL);
-    }
-    for (i = 0; token != NULL; i++)
-    {
-        argv[i] = malloc(_strlen(token) + 1);
-        if (argv[i] == NULL)
+        toks[i] = malloc((_strlen(token) + 1) * sizeof(char));
+        if (toks == NULL)
         {
-            write(1, "tsh: memory allocation error", 28);
-
-            return NULL;
+            _free(toks);
+            return (NULL);
         }
-
-        _strcpy(argv[i], token);
+        _strcpy(toks[i], token);
         token = strtok(NULL, delim);
-        printf("%s: is a token\n", (char *)argv);
+        i++;
     }
-
-    argv[i] = NULL;
-    return argv;
+    toks[toknum] = NULL;
+    return (toks);
 }

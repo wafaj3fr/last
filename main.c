@@ -9,8 +9,8 @@
 
 int main(int ac, char **argv)
 {
-    int i;
-    char *command = NULL, **toks = NULL;
+    char *command = NULL;
+    /*char **toks;*/
     /*char *path;*/
 
     (void)ac;
@@ -24,31 +24,25 @@ int main(int ac, char **argv)
         if (command == NULL)
             continue;
 
-        toks = tok(command, argv);
-        printf("%s", (char *)toks);
-        if (toks == NULL)
+        argv = tok(command);
+        if (argv == NULL)
         {
             free(command);
             continue;
         }
-        for (i = 0; toks[i] != NULL; i++)
-        {
-            printf("%s", toks[i]);
-            printf("THE SHELL");
-        }
 
         free(command);
 
-        exec_wa(toks[0], (char *const *)toks);
+        /*exec_wa(argv[0], (char *const *)argv);*/
 
-        _free(toks);
+        _free(argv);
     }
 
     if (command != NULL)
         free(command);
 
-    if (toks != NULL)
-        _free(toks);
+    if (argv != NULL)
+        _free(argv);
 
     return (0);
 }
