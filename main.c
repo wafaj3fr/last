@@ -10,7 +10,7 @@
 int main(int ac, char **argv)
 {
     char *command = NULL;
-    /*char **toks;*/
+    char **toks;
     /*char *path;*/
 
     (void)ac;
@@ -24,8 +24,8 @@ int main(int ac, char **argv)
         if (command == NULL)
             continue;
 
-        argv = tok(command);
-        if (argv == NULL)
+        toks = tok(command);
+        if (toks == NULL)
         {
             free(command);
             continue;
@@ -33,16 +33,10 @@ int main(int ac, char **argv)
 
         free(command);
 
-        /*exec_wa(argv[0], (char *const *)argv);*/
+        exec_wa(toks[0], (char *const *)toks);
 
-        _free(argv);
+        _free(toks);
     }
-
-    if (command != NULL)
-        free(command);
-
-    if (argv != NULL)
-        _free(argv);
 
     return (0);
 }

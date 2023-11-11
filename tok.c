@@ -20,25 +20,24 @@ char **tok(char *line)
     int i = 0, toknum = 0;
     char **toks = NULL;
 
-    toknum = _strlen(line) + 1;
-    line_copy = malloc(sizeof(char) * toknum);
+    toknum = tok_num(line);
+    line_copy = malloc(_strlen(line) + 1);
     if (line_copy == NULL)
     {
         write(1, "error in allocate memory", _strlen("error in allocate memory"));
         return (NULL);
     }
     _strcpy(line_copy, line);
-    toknum = tok_num(line_copy);
 
     toks = malloc((toknum + 1) * sizeof(char *));
     if (toks == NULL)
         return (NULL);
 
-    token = strtok(line, delim);
+    token = strtok(line_copy, delim);
     while (token != NULL)
     {
-        toks[i] = malloc((_strlen(token) + 1) * sizeof(char));
-        if (toks == NULL)
+        toks[i] = malloc(_strlen(token) + 1);
+        if (toks[i] == NULL)
         {
             _free(toks);
             return (NULL);
