@@ -31,7 +31,7 @@ char **tok(char *line)
     if (line_copy == NULL)
     {
         write(1, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
-        return NULL;
+        return (NULL);
     }
     _strcpy(line_copy, line);
     toknum = tok_num(line_copy);
@@ -41,7 +41,7 @@ char **tok(char *line)
     if (toks == NULL)
     {
         write(1, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
-        return NULL;
+        return (NULL);
     }
 
     token = strtok(line, delim);
@@ -52,7 +52,7 @@ char **tok(char *line)
         {
             _free(toks);
             write(1, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
-            return NULL;
+            return (NULL);
         }
         _strcpy(toks[i], token);
         token = strtok(NULL, delim);
