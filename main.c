@@ -37,6 +37,11 @@ int main(int ac, char **argv)
 
         _free(toks);
     }
+    if (command != NULL)
+        free(command);
+
+    if (toks != NULL)
+        _free(toks);
 
     return (0);
 }

@@ -16,36 +16,49 @@ int tok_num(char *line)
 
 char **tok(char *line)
 {
-    char *line_copy, *token, *delim = " \n\t";
+    char *token, *delim = " \n\t";
     int i = 0, toknum = 0;
     char **toks = NULL;
+    char *line_copy;
 
-    toknum = tok_num(line);
-    line_copy = malloc(_strlen(line) + 1);
-    if (line_copy == NULL)
+    if (line == NULL || *line == '\0')
     {
-        write(1, "error in allocate memory", _strlen("error in allocate memory"));
         return (NULL);
     }
+
+    toknum = _strlen(line) + 1;
+    line_copy = malloc(toknum * (sizeof(char)));
+    if (line_copy == NULL)
+    {
+        write(1, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
+        return NULL;
+    }
     _strcpy(line_copy, line);
+    toknum = tok_num(line_copy);
+    free(line_copy);
 
     toks = malloc((toknum + 1) * sizeof(char *));
     if (toks == NULL)
-        return (NULL);
+    {
+        write(1, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
+        return NULL;
+    }
 
-    token = strtok(line_copy, delim);
+    token = strtok(line, delim);
     while (token != NULL)
     {
-        toks[i] = malloc(_strlen(token) + 1);
-        if (toks[i] == NULL)
+        toks[i] = malloc((_strlen(token) + 1) * sizeof(char));
+        if (toks == NULL)
         {
             _free(toks);
-            return (NULL);
+            write(1, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
+            return NULL;
         }
         _strcpy(toks[i], token);
         token = strtok(NULL, delim);
         i++;
     }
     toks[toknum] = NULL;
+
     return (toks);
 }
