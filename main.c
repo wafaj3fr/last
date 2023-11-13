@@ -33,7 +33,7 @@ int main(int ac, char **argv)
 
         free(command);
 
-        exec_wa(toks[0], (char *const *)toks);
+        exec_wa(toks[0], toks);
 
         _free(toks);
     }
