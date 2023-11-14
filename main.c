@@ -11,6 +11,7 @@ int main(int ac, char **argv, char **env)
 {
     char *command = NULL;
     char **toks;
+    int z = 0;
     /*char *path;*/
 
     (void)ac;
@@ -34,16 +35,19 @@ int main(int ac, char **argv, char **env)
         if (_strcmp(command, "env") == 0)
         {
             print_environment();
+            z = 1;
         }
 
         if (_strcmp(command, "exit") == 0)
         {
+            z = 1;
             break;
         }
 
         free(command);
 
-        exec_wa(toks[0], toks, env);
+        if (z == 0)
+            exec_wa(toks[0], toks, env);
 
         _free(toks);
     }
