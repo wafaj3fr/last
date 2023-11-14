@@ -48,7 +48,7 @@ char **tok(char *line)
     while (token != NULL)
     {
         toks[i] = malloc((_strlen(token) + 1) * sizeof(char));
-        if (toks == NULL)
+        if (toks[i] == NULL)
         {
             _free(toks);
             write(2, " :error in allocate memory\n", _strlen(" :error in allocate memory\n"));
