@@ -39,13 +39,13 @@ int main(int ac, char **argv, char **env)
             continue;
         }
 
-        z = 0;
-
         if (_strcmp(command, "exit") == 0)
         {
             z = 1;
             break;
         }
+
+        z = 0;
 
         free(command);
 
