@@ -1,64 +1,64 @@
 #include "main.h"
 
-int tok_num(char *command)
+int tok_num(char *line)
 {
     char *tok, *sep = " \n";
     int n = 0;
 
-    tok = strtok(command, sep);
+    tok = strtok(line, sep);
     while (tok != NULL)
     {
         n++;
         tok = strtok(NULL, sep);
     }
-
     return (n);
 }
 
-char **tok(char *command)
+char **tok(char *line)
 {
-    char *token, *delim = " \n\r\t", *line_copy = NULL;
-    int i = 0, n_toks = 0;
-    char **arr_toks = NULL;
+    char *token, *delim = " \n\t\r";
+    int i = 0, toknum = 0;
+    char **toks = NULL;
+    char *line_copy;
 
-    if (command == NULL || *command == '\0')
+    if (line == NULL || *line == '\0')
     {
         return (NULL);
     }
 
-    n_toks = _strlen(command) + 1;
-    line_copy = malloc(n_toks * (sizeof(char)));
+    toknum = _strlen(line) + 1;
+    line_copy = malloc(toknum * (sizeof(char)));
     if (line_copy == NULL)
     {
-        write(2, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
+        write(2, " :error in allocate memory\n", _strlen(" :error in allocate memory\n"));
         return (NULL);
     }
-    _strcpy(line_copy, command);
-    n_toks = tok_num(line_copy);
+    _strcpy(line_copy, line);
+    toknum = tok_num(line_copy);
     free(line_copy);
 
-    arr_toks = malloc((n_toks + 1) * sizeof(char *));
-    if (arr_toks == NULL)
+    toks = malloc((toknum + 1) * sizeof(char *));
+    if (toks == NULL)
     {
-        write(2, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
+        write(2, " :error in allocate memory\n", _strlen(" :error in allocate memory\n"));
         return (NULL);
     }
 
-    token = strtok(command, delim);
+    token = strtok(line, delim);
     while (token != NULL)
     {
-        arr_toks[i] = malloc((_strlen(token) + 1) * sizeof(char));
-        if (arr_toks == NULL)
+        toks[i] = malloc((_strlen(token) + 1) * sizeof(char));
+        if (toks == NULL)
         {
-            _free(arr_toks);
-            write(2, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
+            _free(toks);
+            write(2, " :error in allocate memory\n", _strlen(" :error in allocate memory\n"));
             return (NULL);
         }
-        _strcpy(arr_toks[i], token);
+        _strcpy(toks[i], token);
         token = strtok(NULL, delim);
         i++;
     }
-    arr_toks[n_toks] = NULL;
+    toks[toknum] = NULL;
 
-    return (arr_toks);
+    return (toks);
 }

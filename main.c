@@ -36,7 +36,10 @@ int main(int ac, char **argv, char **env)
         {
             print_environment();
             z = 1;
+            continue;
         }
+
+        z = 0;
 
         if (_strcmp(command, "exit") == 0)
         {
