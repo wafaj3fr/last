@@ -15,7 +15,7 @@ void exec_wa(char *path, char *const *argv)
 
         if (execve(path, argv, NULL) == -1)
         {
-            perror("Command not found\n");
+            perror("execve");
             _exit(EXIT_FAILURE);
         }
     }

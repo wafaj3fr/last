@@ -1,39 +1,39 @@
 #include "main.h"
 
-int tok_num(char *line)
+int tok_num(char *command)
 {
     char *tok, *sep = " \n";
     int n = 0;
 
-    tok = strtok(line, sep);
+    tok = strtok(command, sep);
     while (tok != NULL)
     {
         n++;
         tok = strtok(NULL, sep);
     }
+
     return (n);
 }
 
-char **tok(char *line)
+char **tok(char *command)
 {
-    char *token, *delim = " \n\t";
+    char *token, *delim = " \n\r\t", *line_copy = NULL;
     int i = 0, n_toks = 0;
     char **arr_toks = NULL;
-    char *line_copy;
 
-    if (line == NULL || *line == '\0')
+    if (command == NULL || *command == '\0')
     {
         return (NULL);
     }
 
-    n_toks = _strlen(line) + 1;
+    n_toks = _strlen(command) + 1;
     line_copy = malloc(n_toks * (sizeof(char)));
     if (line_copy == NULL)
     {
         write(2, "Error: Memory allocation failed\n", _strlen("Error: Memory allocation failed\n"));
         return (NULL);
     }
-    _strcpy(line_copy, line);
+    _strcpy(line_copy, command);
     n_toks = tok_num(line_copy);
     free(line_copy);
 
@@ -44,7 +44,7 @@ char **tok(char *line)
         return (NULL);
     }
 
-    token = strtok(line, delim);
+    token = strtok(command, delim);
     while (token != NULL)
     {
         arr_toks[i] = malloc((_strlen(token) + 1) * sizeof(char));
