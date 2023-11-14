@@ -1,6 +1,6 @@
 #include "main.h"
 
-void exec_wa(char *path, char *const *argv)
+void exec_wa(char *path, char *const *argv, char **env)
 {
     pid_t pid;
     int status;
@@ -13,7 +13,7 @@ void exec_wa(char *path, char *const *argv)
     else if (pid == 0)
     {
 
-        if (execve(path, argv, NULL) == -1)
+        if (execve(path, argv, env) == -1)
         {
             perror("execve");
             _exit(EXIT_FAILURE);

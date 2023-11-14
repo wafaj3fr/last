@@ -7,7 +7,7 @@
  * Return: 0 for success
  */
 
-int main(int ac, char **argv)
+int main(int ac, char **argv, char **env)
 {
     char *command = NULL;
     char **toks;
@@ -31,9 +31,19 @@ int main(int ac, char **argv)
             continue;
         }
 
+        if (_strcmp(command, "env") == 0)
+        {
+            print_environment();
+        }
+
+        if (_strcmp(command, "exit") == 0)
+        {
+            break;
+        }
+
         free(command);
 
-        exec_wa(toks[0], toks);
+        exec_wa(toks[0], toks, env);
 
         _free(toks);
     }
