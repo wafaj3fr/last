@@ -1,6 +1,6 @@
 #include "main.h"
 
-void exec_wa(char *path, char *const *argv, char **env)
+void exec_wa(char **path, char **argv, char **env)
 {
     pid_t pid;
     int status;
@@ -8,6 +8,16 @@ void exec_wa(char *path, char *const *argv, char **env)
     {
         return;
     }
+
+    /*if (path[0][0] != '.' && path[0][0] != '/')
+    {
+        if (built_in(path, env))
+            return;
+        else if (!get_path(path, env))
+        {
+            return;
+        }
+    }*/
     else
     {
         pid = fork();
@@ -18,7 +28,7 @@ void exec_wa(char *path, char *const *argv, char **env)
         else if (pid == 0)
         {
 
-            if (execve(path, argv, env) == -1)
+            if (execve(path[0], argv, env) == -1)
             {
                 perror("execve Error");
                 _exit(EXIT_FAILURE);
@@ -28,5 +38,5 @@ void exec_wa(char *path, char *const *argv, char **env)
         {
             wait(&status);
         }
-    }    
+    }
 }

@@ -5,41 +5,32 @@
  * @name: name of the env.
  */
 
-char *_getenv(const char *name)
+char *_getenv(char **env, char *name)
 {
-    extern char **environ;
-    int i;
-    char *equality, *path_val;
+    int i = 0;
 
-    for (i = 0; environ[i] != NULL; i++)
+    for (i = 0; env[i]; i++)
     {
-        equality = strtok(environ[i], "=");
-        path_val = strtok(NULL, "");
-        if (strcmp(equality, name) == 0)
-        {
-            return (path_val);
-        }
+        if (_strcmp(name, env[i]) == 0)
+            return (env[i]);
     }
 
-    return NULL;
+    return (NULL);
 }
 
-void print_environment()
-{
-    extern char **environ;
+/**
+ * print_environment - prints environment variables
+ * @env: environment
+ */
 
-    char **env = environ;
-    while (*env)
+void print_environment(char **env)
+{
+    char **envp = env;
+
+    while (*envp != NULL)
     {
-        write(1, *env, _strlen(*env));
-        write(1, "\n", 2);
-        env++;
+        write(1, *envp, _strlen(*envp));
+        write(1, "\n", 1);
+        envp++;
     }
-}
-
-void dollar_prpmpt(void)
-{
-    char *prompt = "$ ";
-
-    write(1, prompt, _strlen(prompt));
 }

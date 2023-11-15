@@ -12,12 +12,13 @@ char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 int _strcmp(const char *s1, const char *s2);
 char **tok(char *command);
-void exec_wa(char *toks, char *const *argv, char **env);
+void exec_wa(char **path, char **argv, char **env);
 char *get_line(char **argv);
 int toknum(char *command);
 void _free(char **arr);
-char *_getenv(const char *name);
-void print_environment();
+char *_getenv(char **env, char *name);
+void print_environment(char **env);
 int get_path(char **tokens, char **env);
+int built_in(char **toks, char **env);
 
 #endif
